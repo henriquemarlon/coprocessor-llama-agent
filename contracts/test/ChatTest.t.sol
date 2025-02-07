@@ -7,18 +7,23 @@ import {TaskIssuerMock} from "./mock/TaskIssuerMock.sol";
 
 contract ChatTest is Test {
     Chat chat;
-    TaskIssuerMock mock;
+    TaskIssuerMock taskIssuerMock;
 
     bytes32 machineHash = bytes32(0);
 
     function setUp() public {
-        mock = new TaskIssuerMock();
-        chat = new Chat(address(mock), machineHash);
+        taskIssuerMock = new TaskIssuerMock();
+        chat = new Chat(address(taskIssuerMock), machineHash);
     }
 
-    function test_response() public {
+    function testCallChatWithAValidInput() public {
         // Payload: What is the meaning of life?
         bytes memory payload = hex"5768617420697320746865206d65616e696e67206f66206c6966653faa";
+
+        vm.expectEmit();
+        emit TaskIssuerMock.TaskIssued(machineHash, payload, address(chat));
+
+        chat.runExecution(payload);
 
         // There isn’t a one-size-fits-all answer to the meaning of life. Whether you draw meaning from spirituality, philosophical inquiry, personal relationships, or scientific curiosity, the search itself can be a meaningful pursuit. It invites each of us to explore our values, passions, and connections, ultimately creating a purpose that is uniquely our own.
         bytes memory output =
@@ -30,16 +35,11 @@ contract ChatTest is Test {
         outputs[0] = notice;
 
         vm.expectEmit();
-        emit TaskIssuerMock.TaskIssued(machineHash, payload, address(chat));
-
-        chat.runExecution(payload);
-
-        vm.expectEmit();
         emit Chat.ResultReceived(keccak256(payload), output);
 
         console.logBytes(outputs[0]);
 
-        vm.prank(address(mock));
+        vm.prank(address(taskIssuerMock));
         chat.coprocessorCallbackOutputsOnly(machineHash, keccak256(payload), outputs);
     }
 }

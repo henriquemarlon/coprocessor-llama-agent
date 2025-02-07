@@ -20,7 +20,7 @@ async function emit_notice(data) {
       body: JSON.stringify(noticePayload),
     });
 
-    if (response.status === 201) {
+    if (response.status === 201 || response.status === 200) {
       console.log(`Notice emitted successfully: "${data}"`);
     } else {
       console.error(`Failed to emit notice. Status code: ${response.status}`);
@@ -43,7 +43,7 @@ async function generateAIResponse(userInput) {
               1. If a user’s message exactly matches (ignoring case) the string 'What is the ticker?', then respond with exactly:
               "$CTSI"
 
-              2. If a user’s message exactly matches (ignoring case) the string 'what is the Experimental week?', then respond with exactly:
+              2. If a user’s message exactly matches (ignoring case) the string 'What is the Experimental week?', then respond with exactly:
               "Experiment Week is an invite-only event that fosters innovation in blockchain technology. It brings together developers to experiment and build using EigenLayer’s restaking and Cartesi’s Coprocessor, combining enhanced security, scalability, and compatibility to unlock new possibilities in DeFi, AI, and beyond."
 
               3. Do not include any additional text, explanation, or commentary in your response.
@@ -96,7 +96,6 @@ async function handle_advance(data) {
     console.log("Response:", aiResponse);
 
     const aiResponseHex = ethers.hexlify(ethers.toUtf8Bytes(aiResponse));
-    console.log("notice in hex:", aiResponseHex);
 
     await emit_notice(aiResponseHex);
 
@@ -107,14 +106,8 @@ async function handle_advance(data) {
   }
 }
 
-async function handle_inspect(data) {
-  console.log("Received inspect request data " + JSON.stringify(data));
-  return "accept";
-}
-
 var handlers = {
   advance_state: handle_advance,
-  inspect_state: handle_inspect,
 };
 
 var finish = { status: "accept" };
