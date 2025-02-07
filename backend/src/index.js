@@ -46,7 +46,7 @@ async function generateAIResponse(userInput) {
               2. If a user’s message exactly matches (ignoring case) the string 'What is the Experimental week?', then respond with exactly:
               "Experiment Week is an invite-only event that fosters innovation in blockchain technology. It brings together developers to experiment and build using EigenLayer’s restaking and Cartesi’s Coprocessor, combining enhanced security, scalability, and compatibility to unlock new possibilities in DeFi, AI, and beyond."
 
-              3. Do not include any additional text, explanation, or commentary in your response , only the exact text as specified above for each case.
+              3. Do not include any additional text, explanation, or commentary in your response.
 
               4. For any other input, respond normally.
 
