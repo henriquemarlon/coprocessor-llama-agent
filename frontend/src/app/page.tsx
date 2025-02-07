@@ -19,10 +19,8 @@ export default function Home() {
   const [isSending, setIsSending] = useState<boolean>(false);
   const { toast } = useToast();
 
-  // Utilizando um Set para facilitar a manipulação dos hashes pendentes
   const pendingHashesRef = useRef<Set<string>>(new Set());
 
-  // Registra um único listener para os eventos ResultReceived
   useEffect(() => {
     const unwatch = watchContractEvent(config, {
       abi: LlamaAgentABI,
@@ -49,7 +47,6 @@ export default function Home() {
               console.error("Invalid values for payloadHash or output:", decodedLog.args);
               return;
             }
-            // Normaliza o hash para letras minúsculas
             const normalizedHash = receivedPayloadHash.toLowerCase();
 
             if (!pendingHashesRef.current.has(normalizedHash)) {
@@ -57,7 +54,6 @@ export default function Home() {
               return;
             }
 
-            // Remove o hash da lista de pendências
             pendingHashesRef.current.delete(normalizedHash);
 
             const outputString = hexToString(output as `0x${string}`);
@@ -69,7 +65,6 @@ export default function Home() {
       },
     });
 
-    // Cleanup: remove o listener ao desmontar o componente
     return () => {
       unwatch();
     };
@@ -91,7 +86,6 @@ export default function Home() {
     const txPayloadHash = keccak256(hexData);
     console.log("Keccak256 Hash:", txPayloadHash);
 
-    // Armazena o hash normalizado no Set de pendências
     pendingHashesRef.current.add(txPayloadHash.toLowerCase());
 
     try {
@@ -107,7 +101,6 @@ export default function Home() {
         title: error instanceof Error ? error.message : "Transaction Error",
         variant: "destructive",
       });
-      // Em caso de falha, remove o hash pendente
       pendingHashesRef.current.delete(txPayloadHash.toLowerCase());
     }
   }
