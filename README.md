@@ -1,0 +1,3 @@
+- Nonodox + cartesi-machine;
+- Manual + devnet;
+- CLI + testnet; 
