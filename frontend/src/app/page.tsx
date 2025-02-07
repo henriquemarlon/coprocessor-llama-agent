@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
 import { useAccount } from "wagmi";
+import { ToastAction } from "@/components/ui/toast";
 import { writeContract, watchContractEvent } from "@wagmi/core";
 import { CustomConnectButton } from "@/components/ConnectButton";
 import { config } from "@/lib/wagmiConfig";
@@ -35,22 +36,38 @@ export default function Home() {
               data: log.data,
               topics: log.topics,
             });
-            if (typeof decodedLog.args !== "object" || decodedLog.args === null) {
-              console.error("Decoded event does not contain valid arguments:", decodedLog.args);
+            if (
+              typeof decodedLog.args !== "object" ||
+              decodedLog.args === null
+            ) {
+              console.error(
+                "Decoded event does not contain valid arguments:",
+                decodedLog.args
+              );
               return;
             }
-            const { payloadHash: receivedPayloadHash, output } = decodedLog.args as unknown as {
-              payloadHash: string;
-              output: string;
-            };
-            if (typeof receivedPayloadHash !== "string" || typeof output !== "string") {
-              console.error("Invalid values for payloadHash or output:", decodedLog.args);
+            const { payloadHash: receivedPayloadHash, output } =
+              decodedLog.args as unknown as {
+                payloadHash: string;
+                output: string;
+              };
+            if (
+              typeof receivedPayloadHash !== "string" ||
+              typeof output !== "string"
+            ) {
+              console.error(
+                "Invalid values for payloadHash or output:",
+                decodedLog.args
+              );
               return;
             }
             const normalizedHash = receivedPayloadHash.toLowerCase();
 
             if (!pendingHashesRef.current.has(normalizedHash)) {
-              console.error("Received payload hash not found in pending list:", normalizedHash);
+              console.error(
+                "Received payload hash not found in pending list:",
+                normalizedHash
+              );
               return;
             }
 
@@ -90,10 +107,15 @@ export default function Home() {
 
     try {
       await writeContract(config, {
-        address: "0x68B1D87F95878fE05B998F19b66F4baba5De1aed" as `0x${string}`,
+        address: process.env.NEXT_PUBLIC_COPROCESSOR_ADAPTER as `0x${string}`,
         abi: LlamaAgentABI,
         functionName: "runExecution",
         args: [hexData],
+      });
+      toast({
+        title: "Input sent",
+        description:
+          "Please wait, the response may take a few minutes to arrive",
       });
     } catch (error) {
       console.error(error);
@@ -109,7 +131,8 @@ export default function Home() {
     if (!isConnected) {
       toast({
         title: "Connect your wallet first",
-        description: "You need to connect your wallet before sending a transaction.",
+        description:
+          "You need to connect your wallet before sending a transaction.",
         variant: "destructive",
       });
       return;
@@ -140,7 +163,10 @@ export default function Home() {
           <CustomConnectButton />
           <p>
             Get test tokens on the faucet{" "}
-            <Link className="underline" href="https://cloud.google.com/application/web3/faucet/ethereum/holesky">
+            <Link
+              className="underline"
+              href="https://cloud.google.com/application/web3/faucet/ethereum/holesky"
+            >
               here
             </Link>
           </p>
@@ -154,7 +180,11 @@ export default function Home() {
             className="w-96 text-justify"
             placeholder="Type your message here."
           />
-          <Button disabled={isSending} className="w-[100%] mb-8 text-md" onClick={handleSendText}>
+          <Button
+            disabled={isSending}
+            className="w-[100%] mb-8 text-md"
+            onClick={handleSendText}
+          >
             Send
           </Button>
           {responses.length > 0 && (

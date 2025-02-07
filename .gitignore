@@ -5,8 +5,6 @@
 *.cid
 *.size
 
-*.gguf
-
 # Compiler files
 cache/
 out/
@@ -15,6 +13,7 @@ out/
 !/broadcast
 /broadcast/*/31337/
 /broadcast/**/dry-run/
+/broadcast
 
 # Docs
 docs/

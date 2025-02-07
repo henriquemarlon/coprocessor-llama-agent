@@ -4,7 +4,7 @@
 START_LOG = @echo "==================== START OF LOG ===================="
 END_LOG = @echo "==================== END OF LOG ======================"
 
-define deploy_chat
+define deploy_agent
 	$(START_LOG)
 	@forge test
 	@forge script script/DeployLlamaAgent.s.sol --rpc-url $(RPC_URL) --private-key $(PRIVATE_KEY) --broadcast -vvv
@@ -16,7 +16,7 @@ setup: .env.tmpl
 	forge install
 	cp .env.tmpl .env
 
-.PHONY: chat
-chat:
+.PHONY: agent
+agent:
 	@echo "Deploying chat..."
-	@$(deploy_chat)
+	@$(deploy_agent)
