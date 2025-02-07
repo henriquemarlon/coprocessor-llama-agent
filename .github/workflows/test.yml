@@ -1,8 +1,18 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FOUNDRY_PROFILE: ci
+
 jobs:
   check:
-    defaults:
-      run:
-        working-directory: contracts
+    strategy:
+      fail-fast: true
+
     name: Foundry project
     runs-on: ubuntu-latest
     steps:
@@ -23,8 +33,10 @@ jobs:
         run: |
           forge build --sizes
         id: build
+        working-directory: /contracts
 
       - name: Run Forge tests
         run: |
           forge test -vvv
         id: test
+        working-directory: /contracts
