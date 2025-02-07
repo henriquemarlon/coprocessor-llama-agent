@@ -3,7 +3,7 @@ pragma solidity ^0.8.28;
 
 import "../lib/coprocessor-base-contract/src/CoprocessorAdapter.sol";
 
-contract Chat is CoprocessorAdapter {
+contract LlamaAgent is CoprocessorAdapter {
     event ResultReceived(bytes32 payloadHash, bytes output);
 
     constructor(address _taskIssuerAddress, bytes32 _machineHash)

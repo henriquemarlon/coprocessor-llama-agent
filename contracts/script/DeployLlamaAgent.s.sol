@@ -2,18 +2,18 @@
 pragma solidity ^0.8.28;
 
 import {Script} from "../lib/forge-std/src/Script.sol";
-import {Chat} from "../src/Chat.sol";
+import {LlamaAgent} from "../src/LlamaAgent.sol";
 
-contract DeployChat is Script {
-    function run() external returns (Chat) {
+contract DeployLlamaAgent is Script {
+    function run() external returns (LlamaAgent) {
         // These values should be replaced with your actual values
         address taskIssuerAddress = vm.envAddress("TASK_ISSUER_ADDRESS");
         bytes32 machineHash = vm.envBytes32("MACHINE_HASH");
 
         vm.startBroadcast();
-        Chat chat = new Chat(taskIssuerAddress, machineHash);
+        LlamaAgent llamaAgent = new LlamaAgent(taskIssuerAddress, machineHash);
         vm.stopBroadcast();
 
-        return chat;
+        return llamaAgent;
     }
 }

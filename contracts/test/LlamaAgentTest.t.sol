@@ -1,19 +1,19 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import {Chat} from "../src/Chat.sol";
+import {LlamaAgent} from "../src/LlamaAgent.sol";
 import {Test, console} from "forge-std/Test.sol";
 import {TaskIssuerMock} from "./mock/TaskIssuerMock.sol";
 
-contract ChatTest is Test {
-    Chat chat;
+contract LlamaAgentTest is Test {
+    LlamaAgent llamaAgent;
     TaskIssuerMock taskIssuerMock;
 
     bytes32 machineHash = bytes32(0);
 
     function setUp() public {
         taskIssuerMock = new TaskIssuerMock();
-        chat = new Chat(address(taskIssuerMock), machineHash);
+        llamaAgent = new LlamaAgent(address(taskIssuerMock), machineHash);
     }
 
     function testCallChatWithAValidInput() public {
@@ -21,9 +21,9 @@ contract ChatTest is Test {
         bytes memory payload = hex"5768617420697320746865206d65616e696e67206f66206c6966653faa";
 
         vm.expectEmit();
-        emit TaskIssuerMock.TaskIssued(machineHash, payload, address(chat));
+        emit TaskIssuerMock.TaskIssued(machineHash, payload, address(llamaAgent));
 
-        chat.runExecution(payload);
+        llamaAgent.runExecution(payload);
 
         // There isn’t a one-size-fits-all answer to the meaning of life. Whether you draw meaning from spirituality, philosophical inquiry, personal relationships, or scientific curiosity, the search itself can be a meaningful pursuit. It invites each of us to explore our values, passions, and connections, ultimately creating a purpose that is uniquely our own.
         bytes memory output =
@@ -35,11 +35,11 @@ contract ChatTest is Test {
         outputs[0] = notice;
 
         vm.expectEmit();
-        emit Chat.ResultReceived(keccak256(payload), output);
+        emit LlamaAgent.ResultReceived(keccak256(payload), output);
 
         console.logBytes(outputs[0]);
 
         vm.prank(address(taskIssuerMock));
-        chat.coprocessorCallbackOutputsOnly(machineHash, keccak256(payload), outputs);
+        llamaAgent.coprocessorCallbackOutputsOnly(machineHash, keccak256(payload), outputs);
     }
 }
