@@ -7,7 +7,7 @@ END_LOG = @echo "==================== END OF LOG ======================"
 define deploy_chat
 	$(START_LOG)
 	@forge test
-	@forge script script/DeployChat.s.sol --rpc-url $(RPC_URL) --private-key $(PRIVATE_KEY) --broadcast -vvv
+	@forge script script/DeployLlamaAgent.s.sol --rpc-url $(RPC_URL) --private-key $(PRIVATE_KEY) --broadcast -vvv
 	$(END_LOG)
 endef
 

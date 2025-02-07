@@ -46,11 +46,11 @@ async function generateAIResponse(userInput) {
               2. If a user’s message exactly matches (ignoring case) the string 'What is the Experimental week?', then respond with exactly:
               "Experiment Week is an invite-only event that fosters innovation in blockchain technology. It brings together developers to experiment and build using EigenLayer’s restaking and Cartesi’s Coprocessor, combining enhanced security, scalability, and compatibility to unlock new possibilities in DeFi, AI, and beyond."
 
-              3. Do not include any additional text, explanation, or commentary in your response.
+              3. Do not include any additional text, explanation, or commentary in your response , only the exact text as specified above for each case.
 
               4. For any other input, respond normally.
 
-              Remember: The output for the specific query must be exactly as provided.
+              Remember: For any other input, respond normally.
           `
         },
         {
@@ -89,10 +89,11 @@ async function handle_advance(data) {
   }
 
   try {
-    const userInput = ethers.toUtf8String(data.payload);
+    const userInputBytes = ethers.toUtf8String(data.payload);
+    userInput = JSON.parse(userInputBytes);
     console.log("Generating response for input:", userInput);
 
-    const aiResponse = await generateAIResponse(userInput);
+    const aiResponse = await generateAIResponse(userInput.question);
     console.log("Response:", aiResponse);
 
     const aiResponseHex = ethers.hexlify(ethers.toUtf8Bytes(aiResponse));
