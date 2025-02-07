@@ -1,4 +1,4 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 export const CustomConnectButton = () => {
   return (
     <ConnectButton.Custom>
@@ -13,45 +13,52 @@ export const CustomConnectButton = () => {
       }) => {
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== 'loading';
+        const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
           account &&
           chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+          (!authenticationStatus || authenticationStatus === "authenticated");
         return (
           <div
             {...(!ready && {
-              'aria-hidden': true,
-              'style': {
+              "aria-hidden": true,
+              style: {
                 opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
+                pointerEvents: "none",
+                userSelect: "none",
               },
             })}
           >
             {(() => {
               if (!connected) {
                 return (
-                  <button onClick={openConnectModal} type="button" className='bg-black text-white w-48 py-2 rounded mb-8 text-md'>
+                  <button
+                    onClick={openConnectModal}
+                    type="button"
+                    className="bg-black text-white w-48 py-2 rounded text-md"
+                  >
                     Connect Wallet
                   </button>
                 );
               }
               if (chain.unsupported) {
                 return (
-                  <button className='rounded border border-gray-600 p-2 shadow-md' onClick={openChainModal} type="button">
+                  <button
+                    className="rounded border border-gray-600 p-2 shadow-md"
+                    onClick={openChainModal}
+                    type="button"
+                  >
                     Wrong network
                   </button>
                 );
               }
               return (
-                <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ display: "flex", gap: 12 }}>
                   <button
-                    className='rounded border border-gray-600 p-2 shadow-md'
+                    className="rounded border border-gray-600 p-2 shadow-md"
                     onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
+                    style={{ display: "flex", alignItems: "center" }}
                     type="button"
                   >
                     {chain.hasIcon && (
@@ -61,13 +68,13 @@ export const CustomConnectButton = () => {
                           width: 12,
                           height: 12,
                           borderRadius: 999,
-                          overflow: 'hidden',
+                          overflow: "hidden",
                           marginRight: 4,
                         }}
                       >
                         {chain.iconUrl && (
                           <img
-                            alt={chain.name ?? 'Chain icon'}
+                            alt={chain.name ?? "Chain icon"}
                             src={chain.iconUrl}
                             style={{ width: 12, height: 12 }}
                           />
@@ -76,14 +83,15 @@ export const CustomConnectButton = () => {
                     )}
                     {chain.name}
                   </button>
-                  <button 
-                  className='rounded border border-gray-600 p-2 shadow-md'
-                  onClick={openAccountModal} type="button"
+                  <button
+                    className="rounded border border-gray-600 p-2 shadow-md"
+                    onClick={openAccountModal}
+                    type="button"
                   >
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`
-                      : ''}
+                      : ""}
                   </button>
                 </div>
               );
