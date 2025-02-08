@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
 import { useAccount } from "wagmi";
-import { ToastAction } from "@/components/ui/toast";
 import { writeContract, watchContractEvent } from "@wagmi/core";
 import { CustomConnectButton } from "@/components/ConnectButton";
 import { config } from "@/lib/wagmiConfig";
