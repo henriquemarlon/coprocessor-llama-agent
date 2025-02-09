@@ -100,3 +100,6 @@ npm run dev
 > Although this README provides instructions for the devnet environment, this application can be deployed on testnet and hosted on an infrastructure provided for the Experimental Week, which even has a Llama.cpp server available for communication via GIO. Follow the intructions provided [here](https://docs.mugen.builders/cartesi-co-processor-tutorial/deploy).
 
 ### Demo
+
+https://github.com/user-attachments/assets/c7d5311e-12c1-474b-b719-8c6e4414d186
+
