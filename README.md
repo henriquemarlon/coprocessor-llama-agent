@@ -21,9 +21,6 @@
 - [Running](#running)
 - [Demo](#demo)
 
-> [!CAUTION]
-> In the devnet environment, this project was only tested on Linux x86-64, MacOS users may encounter issues.
-
 ###  Prerequisites
 
 1. [Install Docker Desktop for your operating system](https://www.docker.com/products/docker-desktop/).
@@ -45,6 +42,9 @@
 4. [Install the Cartesi Coprocessor CLI](https://docs.mugen.builders/cartesi-co-processor-tutorial/installation)
 
 ###  Running
+
+> [!CAUTION]
+> In the devnet environment, this project was only tested on Linux x86-64, MacOS users may encounter issues.
 
 1. Start the devnet coprocessor infrastructure + Llama.cpp server:
 
