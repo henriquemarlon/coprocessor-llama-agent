@@ -43,10 +43,10 @@
 
 ###  Running
 
+1. Start the devnet coprocessor infrastructure + Llama.cpp server:
+
 > [!CAUTION]
 > In the devnet environment, this project was only tested on Linux x86-64, MacOS users may encounter issues.
-
-1. Start the devnet coprocessor infrastructure + Llama.cpp server:
 
 ```bash
 git clone https://github.com/zippiehq/cartesi-coprocessor
