@@ -15,12 +15,14 @@
 	<img src="https://img.shields.io/github/last-commit/henriquemarlon/coprocessor-llama-agent?style=default&logo=git&logoColor=white&color=868380" alt="last-commit">
 </p>
 
+> [!CAUTION]
+> placeholder.
+
 ##  Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Running](#running)
 - [Demo](#demo)
-
 
 ###  Prerequisites
 
@@ -32,44 +34,52 @@
     docker run --privileged --rm tonistiigi/binfmt --install all
    ```
 
-2. [Download and install the latest version of Node.js](https://nodejs.org/en/download).
+2. [Download and install the latest version of Node.js](https://nodejs.org/en/download)
 
 3. Cartesi CLI is an easy-to-use tool to build and deploy your dApps. To install it, run:
 
-```shell
-npm i -g @cartesi/cli
-```
+   ```shell
+   npm i -g @cartesi/cli
+   ```
+
+4. [Install the Cartesi Coprocessor CLI](https://docs.mugen.builders/cartesi-co-processor-tutorial/installation)
 
 ###  Running
 
 1. Start the devnet coprocessor infrastructure:
 
 ```bash
-
+cartesi-coprocessor start-devnet
 ```
 
 2. Build and Publish the application:
 
 ```sh
+cd coprocessor
 cartesi-coprocessor publish --network devnet
 ```
 
+3. Deploy LlamaAgent.sol contract:
+
 > [!WARNING]
 > placeholder.
-
-3. Deploy TreeDetector.sol and Token.sol contract:
    
 ```sh
-make detector
+cd contracts
+make agent
 ```
+
+4. Run the frontend:
 
 > [!WARNING]
 > placeholder.
 
-4. Running the frontend:
-
 ```sh
+cd frontend
 npm run dev
 ```
+
+> [!NOTE]
+> placeholder.
 
 ### Demo
