@@ -59,7 +59,7 @@ cd coprocessor
 cartesi-coprocessor publish --network devnet
 ```
 
-3. Deploy LlamaAgent.sol contract:
+3. Deploy `LlamaAgent.sol` contract:
 
 > [!WARNING]
 > placeholder.
