@@ -78,6 +78,7 @@ cartesi-coprocessor publish --network devnet
    
 ```sh
 cd contracts
+forge install
 make agent
 ```
 
