@@ -1,7 +1,3 @@
-- Nonodox + cartesi-machine;
-- Manual + devnet;
-- CLI + testnet; 
-
 cartesi-machine --network --flash-drive=label:root,filename:.cartesi/image.ext2 \
 --volume=.:/mnt --env=ROLLUP_HTTP_SERVER_URL=http://10.0.2.2:5004 --env=LLAMA_LOCAL_URL=http://10.0.2.2:8080 --workdir=/opt/cartesi/dapp -- /usr/local/bin/startup.sh
 
