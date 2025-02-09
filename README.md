@@ -64,7 +64,17 @@ cartesi-coprocessor publish --network devnet
 3. Deploy the `LlamaAgent.sol` contract:
 
 > [!WARNING]
-> placeholder.
+> 
+> Before deploy the contract, create a `.env` file like this
+> ```bash
+> RPC_URL=http://localhost:8545
+> PRIVATE_KEY="0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+> MACHINE_HASH=""
+> TASK_ISSUER_ADDRESS=""
+> ```
+> 
+> - You can see the machine hash running `cartesi hash` in the folder `/coprocessor`;
+> - You can see the task issuer address for the devnet enviroment running `cartesi-coprocessor address-book`;
    
 ```sh
 cd contracts
@@ -74,7 +84,11 @@ make agent
 4. Run the frontend:
 
 > [!WARNING]
-> placeholder.
+> Before run the frontend, please update the `.env.local` file with the LlamaAgent address deployed:
+> ```bash
+> NEXT_PUBLIC_PROJECT_ID="e47c5026ed6cf8c2b219df99a94f60f4"
+> NEXT_PUBLIC_COPROCESSOR_ADAPTER=""
+> ```
 
 ```sh
 cd frontend
@@ -82,6 +96,6 @@ npm run dev
 ```
 
 > [!NOTE]
-> placeholder.
+> Although this README provides instructions for the devnet environment, this application can be deployed on testnet and hosted on an infrastructure provided for the Experimental Week, which even has a Llama.cpp server available for communication via GIO. Follow the intructions provided [here](https://docs.mugen.builders/cartesi-co-processor-tutorial/deploy)
 
 ### Demo
