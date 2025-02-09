@@ -15,14 +15,14 @@
 	<img src="https://img.shields.io/github/last-commit/henriquemarlon/coprocessor-llama-agent?style=default&logo=git&logoColor=white&color=868380" alt="last-commit">
 </p>
 
-> [!CAUTION]
-> In the devnet environment, this project was only tested on Linux x86-64, MacOS users may encounter issues.
-
 ##  Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Running](#running)
 - [Demo](#demo)
+
+> [!CAUTION]
+> In the devnet environment, this project was only tested on Linux x86-64, MacOS users may encounter issues.
 
 ###  Prerequisites
 
