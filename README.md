@@ -16,7 +16,7 @@
 </p>
 
 > [!CAUTION]
-> placeholder.
+> In the devnet environment, this project was only tested on Linux x86-64, MacOS users may encounter issues.
 
 ##  Table of Contents
 
@@ -46,10 +46,12 @@
 
 ###  Running
 
-1. Start the devnet coprocessor infrastructure:
+1. Start the devnet coprocessor infrastructure + Llama.cpp server:
 
 ```bash
-cartesi-coprocessor start-devnet
+git clone https://github.com/zippiehq/cartesi-coprocessor
+cd cartesi-coprocessor
+docker compose -f docker-compose-devnet.yaml --profile llm up --build
 ```
 
 2. Build and Publish the application:
