@@ -69,10 +69,11 @@ export default function Home() {
               );
               return;
             }
-
+            
             pendingHashesRef.current.delete(normalizedHash);
-
+            
             const outputString = hexToString(output as `0x${string}`);
+            console.log("Received payload:", outputString);
             setResponses((prev) => [...prev, outputString]);
           } catch (error) {
             console.error("Error decoding the event log:", error);
@@ -161,7 +162,7 @@ export default function Home() {
         <div className="flex flex-col gap-2 items-center">
           <CustomConnectButton />
           <p>
-            Get test tokens on the faucet{" "}
+            Get holešky on the faucet{" "}
             <Link
               className="underline"
               href="https://cloud.google.com/application/web3/faucet/ethereum/holesky"
